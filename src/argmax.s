@@ -16,15 +16,24 @@
 # =================================================================
 argmax:
     # Prologue
-
+addi t0 x0 1
+addi t1 x0 0
+lw t2 0(a0)
+bge a1 t0 loop_start
+li a0 36
+j exit
 
 loop_start:
-
-
+lw t3 0(a0)
+bge t2 t3 loop_continue
+addi t2 t3 0
+addi t1 t0 -1
 loop_continue:
-
-
+addi a0 a0 4
+bge t0 a1 loop_end
+addi t0 t0 1
+j loop_start
 loop_end:
     # Epilogue
-
+    add a0 x0 t1
     jr ra
